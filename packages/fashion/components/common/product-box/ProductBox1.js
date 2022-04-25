@@ -59,12 +59,6 @@ const ProductItem = ({
     }
   };
 
-  // let RatingStars = [];
-  // let rating = 5;
-  // for (var i = 0; i < rating; i++) {
-  //   RatingStars.push(<i className="fa fa-star" key={i}></i>);
-  // }
-
   return (
     <div className="product-box product-wrap">
       <div className="img-wrapper">
@@ -81,7 +75,7 @@ const ProductItem = ({
         </div>
         {backImage ? (
           product.assets === undefined || product.assets[1] === undefined ? (
-            "false"
+            ""
           ) : (
             <div className="back" onClick={clickProductDetail}>
               <Media
