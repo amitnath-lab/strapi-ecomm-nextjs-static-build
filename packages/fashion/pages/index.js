@@ -1,209 +1,80 @@
-import Head from 'next/head'
+import React from "react";
 
-export default function Home() {
+import Banner from "../components/fashion/Banner";
+import CollectionBanner from "../components/fashion/Collection-Banner";
+import Parallax from "../components/fashion/Parallax";
+import TopCollection from "../components/common/Collections/Collection3";
+import ServiceLayout from "../components/common/Service/service1";
+import LogoBlock from "../components/common/logo-block";
+import HeaderOne from "../components/headers/header-one";
+import { Product4 } from "../services/script";
+import Paragraph from "../components/common/Paragraph";
+import ModalComponent from "../components/common/Modal";
+import Helmet from "react-helmet";
+import MasterFooter from "../components/footers/common/MasterFooter";
+import {getCMSPageData} from "../helpers/apollo/cms";
+import {getPageDataFromCommerce} from "../helpers/apollo/commerce";
+
+const Fashion = ({cmsData, commerceData}) => {
   return (
-    <div className="container">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      {cmsData.homepageFashions.data.map((homepage) => {
+        return (
+          <>
+            <Helmet>
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="icon" type="image/x-icon" href={process.env.MEDIA_URL_PREFIX + homepage.attributes.HelmetWrapper.favicon} />
+            </Helmet>
+            <ModalComponent data={homepage.attributes.ModalComponent} mediaURLPrefix={process.env.MEDIA_URL_PREFIX} />
+            <HeaderOne logoName={process.env.MEDIA_URL_PREFIX + homepage.attributes.logo} topClass="top-header" />
+            <Banner />
+            <CollectionBanner />
+            <Paragraph
+              title="title1 section-t-space"
+              inner="title-inner1"
+              hrClass={false}
+            />            
+             <TopCollection
+              productData={commerceData}
+              noTitle="null"
+              backImage={true}
+              type="fashion"
+              title="top collection"
+              subtitle="special offer"
+              productSlider={Product4}
+              designClass="section-b-space p-t-0 ratio_asos"
+              noSlider="false"
+              cartClass="cart-info cart-wrap"
+            /> 
+            <Parallax />
+            <ServiceLayout sectionClass="border-section small-section" />
+            {/*<Blog type="fashion" title="title1" inner="title-inner1" /> 
+            <Instagram type="fashion" />*/}
+            <div className="section-b-space">
+              <LogoBlock />
+            </div>
+            <MasterFooter
+              data={homepage.attributes.MasterFooter}
+              footerClass={`footer-light`}
+              footerLayOut={"light-layout upper-footer"}
+              footerSection={"small-section border-section border-top-0"}
+              belowSection={"section-b-space light-layout"}
+              newLatter={true}
+              logoName={"ca_logo.jpg"}
+            />
+          </>
+        );
+      })};
+    </>
+  );
+};
 
-      <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+export async function getStaticProps({ preview = null }) {
+  const cmsData = await getCMSPageData("user1-homepage")
+  const commerceData = await getPageDataFromCommerce()
+  return {
+    props: { cmsData, commerceData },
+  }
 }
+
+export default Fashion;

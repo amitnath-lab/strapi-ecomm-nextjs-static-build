@@ -6,8 +6,27 @@
     "start": "next start"
   },
   "dependencies": {
+    "bootstrap-scss": "4.6.1",
     "next": "latest",
+    "next-compose-plugins": "2.2.1",
+    "next-images": "1.8.4",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-helmet": "6.1.0",
+    "react-image-lightbox": "5.1.4",
+    "react-toastify": "8.2.0",
+    "react-slick": "0.29.0",
+    "sass": "1.50.1",
+    "graphql-tag": "2.12.6",
+    "reactstrap": "9.0.2",
+    "react-content-loader": "6.2.0",
+    "i18next": "21.6.16",
+    "react-i18next": "11.16.7",
+    "i18next-browser-languagedetector": "6.1.4",
+    "firebase": "9.6.11"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
+    "webpack": "^5.72.0"
   }
 }
