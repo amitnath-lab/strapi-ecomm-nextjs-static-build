@@ -23,7 +23,8 @@
     "i18next": "21.6.16",
     "react-i18next": "11.16.7",
     "i18next-browser-languagedetector": "6.1.4",
-    "firebase": "9.6.11"
+    "firebase": "9.6.11",
+    "@aws-sdk/client-s3": "^3.67.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
