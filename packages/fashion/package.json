@@ -3,28 +3,31 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "next build && next export"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.67.0",
     "bootstrap-scss": "4.6.1",
+    "download": "^8.0.0",
+    "firebase": "9.6.11",
+    "graphql-tag": "2.12.6",
+    "i18next": "21.6.16",
+    "i18next-browser-languagedetector": "6.1.4",
     "next": "latest",
     "next-compose-plugins": "2.2.1",
     "next-images": "1.8.4",
     "react": "17.0.2",
+    "react-content-loader": "6.2.0",
     "react-dom": "17.0.2",
     "react-helmet": "6.1.0",
-    "react-image-lightbox": "5.1.4",
-    "react-toastify": "8.2.0",
-    "react-slick": "0.29.0",
-    "sass": "1.50.1",
-    "graphql-tag": "2.12.6",
-    "reactstrap": "9.0.2",
-    "react-content-loader": "6.2.0",
-    "i18next": "21.6.16",
     "react-i18next": "11.16.7",
-    "i18next-browser-languagedetector": "6.1.4",
-    "firebase": "9.6.11",
-    "@aws-sdk/client-s3": "^3.67.0"
+    "react-image-lightbox": "5.1.4",
+    "react-slick": "0.29.0",
+    "react-toastify": "8.2.0",
+    "reactstrap": "9.0.2",
+    "sass": "1.50.1",
+    "walk": "^2.3.15"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
