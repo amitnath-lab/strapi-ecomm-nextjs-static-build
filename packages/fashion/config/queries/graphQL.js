@@ -1,20 +1,28 @@
-export const HOMEPAGE_CMS_QUERY = `query ($filters: HomepageFashionFiltersInput) {
+export const HOMEPAGE_CMS_QUERY = `# Write your query or mutation here
+query ($filters: HomepageFashionFiltersInput) {
     homepageFashions(filters: $filters) {
       data {
         attributes {
           slug
-          logo
           HelmetWrapper {
-            favicon
-          }
-          ModalComponent {
-            offerBanner
-            offerContentH2
-            subscribeBtnText
+            favicon {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
           }
           HeaderOne {
             headerContactWelcome
             headerContactCallus
+            logo {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
           }
           MasterFooter {
             subscribeH4
@@ -24,6 +32,13 @@ export const HOMEPAGE_CMS_QUERY = `query ($filters: HomepageFashionFiltersInput)
             footerCol3L1
             footerCol3L2
             footerCol3L3
+            logo {
+              data {
+                attributes {
+                  url
+                }
+              }
+            }
           }
         }
       }

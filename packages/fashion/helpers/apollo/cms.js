@@ -1,5 +1,5 @@
 import {HOMEPAGE_CMS_QUERY} from "../../config/queries/graphQL";
-
+import traverse from "traverse"
 async function fetchAPI(query, { variables } = {}) {
   const res = await fetch(`${process.env.STRAPI_URL}/graphql`, {
     method: 'POST',
@@ -22,11 +22,18 @@ async function fetchAPI(query, { variables } = {}) {
 }
 
 export async function getCMSPageData(page) {
-  return await fetchAPI(HOMEPAGE_CMS_QUERY,
+  let data = await fetchAPI(HOMEPAGE_CMS_QUERY,
     {
       variables: {
-        filters: {slug : {eq : page}},
+        filters: {id : {eq : page}},
       }
     }
   )
+
+  const strapiURL = process.env.STRAPI_URL;
+  return traverse(data).map(function (x) {
+    if (this.key === 'url') {
+      this.update(strapiURL + x)
+    }
+  });
 }

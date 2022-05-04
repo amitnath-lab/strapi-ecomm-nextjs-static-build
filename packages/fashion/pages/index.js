@@ -23,10 +23,9 @@ const Fashion = ({cmsData, commerceData}) => {
           <>
             <Helmet>
               <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="icon" type="image/x-icon" href={process.env.MEDIA_URL_PREFIX + homepage.attributes.HelmetWrapper.favicon} />
+              <link rel="icon" type="image/x-icon" href={homepage.attributes.HelmetWrapper.favicon.data.attributes.url}/>
             </Helmet>
-            <ModalComponent data={homepage.attributes.ModalComponent} mediaURLPrefix={process.env.MEDIA_URL_PREFIX} />
-            <HeaderOne logoName={process.env.MEDIA_URL_PREFIX + homepage.attributes.logo} topClass="top-header" />
+            <HeaderOne logoName={homepage.attributes.HeaderOne.logo.data.attributes.url} topClass="top-header" />
             <Banner />
             <CollectionBanner />
             <Paragraph
@@ -60,7 +59,6 @@ const Fashion = ({cmsData, commerceData}) => {
               footerSection={"small-section border-section border-top-0"}
               belowSection={"section-b-space light-layout"}
               newLatter={true}
-              logoName={"ca_logo.jpg"}
             />
           </>
         );
@@ -70,7 +68,7 @@ const Fashion = ({cmsData, commerceData}) => {
 };
 
 export async function getStaticProps({ preview = null }) {
-  const cmsData = await getCMSPageData("user1-homepage")
+  const cmsData = await getCMSPageData("1")
   const commerceData = await getPageDataFromCommerce()
   return {
     props: { cmsData, commerceData },

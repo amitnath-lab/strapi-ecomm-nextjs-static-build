@@ -7,7 +7,7 @@ const walk = require('walk')
 // node fetchImages.js nextjsOutDirectory imagesPrefix1 imagesPrefix2 imagesPrefix3
 
 // example :
-// node fetchImages.js ./out http://localhost:1337
+// node fetchImages.js ./out http://localhost:1337 http://localhost:3100
 
 // What I did :
 // - Put the file at the root of my project
@@ -22,7 +22,10 @@ async function fetchImages() {
     if (fileStats.name.indexOf('.html') > 0) {
       const filePath = path.join(root, fileStats.name)
       const file = await fsp.readFile(filePath, { encoding: 'utf-8' })
-      await handlePage(file, filePath)
+      const handlePageAsync = async (file, filePath, url) => {
+        await handlePage(file, filePath, url)
+      };
+      await Promise.all(urls.map(url => handlePageAsync(file,filePath,url)))
     }
     next()
   })
@@ -32,8 +35,8 @@ async function fetchImages() {
   });
 }
 
-async function handlePage(data, filePath) {
-    while ((startIndex = data.indexOf("http://")) > -1) {
+async function handlePage(data, filePath,url) {
+    while ((startIndex = data.indexOf(url)) > -1) {
         const endIndex = data.indexOf("\"", startIndex)
         const urlToReplace = data.substring(startIndex,endIndex)
         console.log("URL to replace ", urlToReplace)
@@ -41,6 +44,7 @@ async function handlePage(data, filePath) {
         const fileName = urlTrimmed.split('/').pop().split('\\').pop()
         console.log("Downloading ... ", fileName)
         await download(urlToReplace, path.join(startPath, '/assets'))
+        console.log('replacing ', urlToReplace,' with', `/assets/${fileName}`)
         data = data.replace(urlToReplace, `/assets/${fileName}`)
     }
     fsp.writeFile(filePath, data, { encoding: 'utf8' })

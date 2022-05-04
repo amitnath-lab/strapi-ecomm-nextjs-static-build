@@ -27,6 +27,7 @@
     "react-toastify": "8.2.0",
     "reactstrap": "9.0.2",
     "sass": "1.50.1",
+    "traverse": "^0.6.6",
     "walk": "^2.3.15"
   },
   "devDependencies": {

@@ -16,7 +16,6 @@ import CopyRight from "./copyright";
 const MasterFooter = ({
   data,
   containerFluid,
-  logoName,
   layoutClass,
   footerClass,
   footerLayOut,
@@ -109,7 +108,7 @@ const MasterFooter = ({
                 >
                   <div className="footer-contant">
                     <div className="footer-logo">
-                      <LogoImage logo={logoName} />
+                      <LogoImage logo={data.logo.data.attributes.url}/>
                     </div>
                     <p>
                       {data.footerLogoParagraph}
